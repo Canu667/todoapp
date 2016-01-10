@@ -1,0 +1,9 @@
+default:
+    extensions:
+        Lakion\Behat\MinkDebugExtension:
+            directory: /home/mateusz/todoapp/debug
+            screenshot: true
+            clean_start: true
+        Behat\MinkExtension:
+            base_url: http://192.168.56.101:3000/client/
+            selenium2: ~

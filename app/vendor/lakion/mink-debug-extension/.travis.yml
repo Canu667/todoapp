@@ -1,0 +1,30 @@
+language: php
+
+env:
+  global:
+    - MINK_DEBUG_CACHE_DIR=$HOME/.mink-debug-cache
+
+cache:
+  directories:
+    - bin
+    - vendor
+    - $HOME/.composer/cache
+    - $MINK_DEBUG_CACHE_DIR
+
+php:
+  - 7.0
+  - 5.6
+  - 5.5
+  - hhvm
+
+before_install:
+  - mkdir -p $MINK_DEBUG_CACHE_DIR
+  - travis/run-selenium
+
+before_script:
+  - composer install --prefer-source
+  - travis/tools/wait-for-port 4444
+
+script:
+  - bin/phpspec run -f pretty
+  - bin/behat --strict -f progress

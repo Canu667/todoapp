@@ -1,0 +1,50 @@
+<?php
+require '../app/vendor/autoload.php';
+
+use Behat\Behat\Context\Context;
+use Behat\Behat\Context\SnippetAcceptingContext;
+use Behat\Gherkin\Node\PyStringNode;
+use Behat\Gherkin\Node\TableNode;
+use Behat\MinkExtension\Context\MinkContext;
+use Behat\Mink\Driver\Selenium2Driver;
+use Behat\Behat\Hook\Scope\AfterStepScope;
+
+$arg = "Multi";
+// Choose a Mink driver. More about it in later chapters.
+$driver = new Selenium2Driver(); 
+
+$session = new \Behat\Mink\Session($driver);
+
+// start the session
+$session->start();
+        
+$session->visit('http://192.168.56.101:3000/client/');
+
+$page = $session->getPage();
+
+$all_projects = $page->findAll('css', '#projects li');
+
+foreach($all_projects as $project) {
+    $class = $project->hasClass('nav-header');
+    if(!$class) {
+        if($project->getText() == $arg) {
+            echo "Element present!!\n";
+        }
+    }
+}
+
+        foreach($all_projects as $project) {
+            $class = $project->hasClass('nav-header');
+            if(!$class) {
+                if($project->getText() == $arg) {
+                    echo "Clicking...".$project->getText()."\n";
+                    $project->find('css', 'a')->click();
+                    var_dump($project->getParent());
+                    $clicked = TRUE;
+                }
+            }
+        }
+
+//$session->stop();
+
+

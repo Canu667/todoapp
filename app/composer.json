@@ -1,0 +1,11 @@
+{
+    "require": {
+        "slim/slim": "^3.0", 
+        "behat/behat": "3.*@stable",
+        "behat/mink": "1.6.*@stable",
+        "behat/mink-extension": "@stable",
+        "behat/mink-goutte-driver": "@stable",
+        "behat/mink-selenium2-driver": "@stable",
+        "lakion/mink-debug-extension": "^1.0"
+    }
+}
